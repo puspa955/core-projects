@@ -1,7 +1,6 @@
 // src/lib/auth.ts
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-import { db } from "./db"
 import bcrypt from "bcryptjs"
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
@@ -17,6 +16,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
         const email = String(credentials.email).toLowerCase()
         const password = String(credentials.password)
+
+        // ✅ CRITICAL FIX: Import db INSIDE the function
+        // This prevents it from being loaded in edge runtime
+        const { db } = await import("./db")
 
         const user = await db.user.findUnique({ where: { email } })
         if (!user || !user.password) return null

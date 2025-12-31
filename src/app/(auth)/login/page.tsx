@@ -113,7 +113,7 @@ export default function LoginPage() {
         </CardContent>
         <CardFooter className="text-sm">
           Don’t have an account?{" "}
-          <Link href="/register" className="text-blue-600 underline">
+          <Link href="/signup" className="text-blue-600 underline">
             Sign up
           </Link>
         </CardFooter>

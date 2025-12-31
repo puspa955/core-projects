@@ -2,6 +2,9 @@ import { NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import { db } from "@/lib/db"
 
+// ✅ ADD THIS LINE - Force Node.js runtime
+export const runtime = 'nodejs'
+
 export async function POST(req: Request) {
   try {
     console.log("Signup API called")
