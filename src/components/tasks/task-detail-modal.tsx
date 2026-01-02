@@ -2,7 +2,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Filter, X, Edit2, Trash2, Calendar, Flag } from "lucide-react"
+import { X, Edit2, Trash2, Calendar } from "lucide-react"
 import DeleteConfirmDialog from "./delete-confirm-dialog"
 import type { Task } from "@/types/task"
 

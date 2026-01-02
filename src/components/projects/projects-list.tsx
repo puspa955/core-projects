@@ -3,45 +3,38 @@
 import { useEffect, useState } from "react"
 import ProjectCard from "./project-card"
 import CreateProjectModal from "./create-project-modal"
-
-export type Project = {
-  id: string
-  name: string
-  description?: string
-}
+import type { Project } from "@/types/project"
 
 export default function ProjectsList() {
   const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-  async function loadProjects() {
-    try {
-      const res = await fetch("/api/projects")
+    async function loadProjects() {
+      try {
+        const res = await fetch("/api/projects")
 
-      if (!res.ok) {
+        if (!res.ok) {
+          setProjects([])
+          return
+        }
+
+        const data: unknown = await res.json()
+
+        if (Array.isArray(data)) {
+          setProjects(data as Project[])
+        } else {
+          setProjects([])
+        }
+      } catch {
         setProjects([])
-        return
+      } finally {
+        setLoading(false)
       }
-
-      const data = await res.json()
-
-      // ✅ ensure array
-      if (Array.isArray(data)) {
-        setProjects(data)
-      } else {
-        setProjects([])
-      }
-    } catch (error) {
-      setProjects([])
-    } finally {
-      setLoading(false)
     }
-  }
 
-  loadProjects()
-}, [])
-
+    loadProjects()
+  }, [])
 
   if (loading) return <p>Loading projects...</p>
 
@@ -49,7 +42,9 @@ export default function ProjectsList() {
     return (
       <div className="text-center">
         <p className="mb-4">No projects yet</p>
-        <CreateProjectModal onCreated={(p) => setProjects([p])} />
+        <CreateProjectModal
+          onCreated={(project) => setProjects([project])}
+        />
       </div>
     )
   }
@@ -58,7 +53,9 @@ export default function ProjectsList() {
     <>
       <div className="mb-4">
         <CreateProjectModal
-          onCreated={(p) => setProjects((prev) => [p, ...prev])}
+          onCreated={(project) =>
+            setProjects((prev) => [project, ...prev])
+          }
         />
       </div>
 

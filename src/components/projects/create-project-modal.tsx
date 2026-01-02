@@ -11,12 +11,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import type { Project } from "@/types/project"
+
+interface CreateProjectModalProps {
+  onCreated: (project: Project) => void
+}
 
 export default function CreateProjectModal({
   onCreated,
-}: {
-  onCreated: (project: any) => void
-}) {
+}: CreateProjectModalProps) {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [loading, setLoading] = useState(false)

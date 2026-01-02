@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
-import { Project } from "./projects-list"
+import type { Project } from "@/types/project"
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (

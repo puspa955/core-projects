@@ -1,7 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { Search, Filter, X, Edit2, Trash2, Calendar, Flag } from "lucide-react"
+import { Trash2 } from "lucide-react"
 
 export default function DeleteConfirmDialog({
   isOpen,
@@ -31,7 +30,7 @@ export default function DeleteConfirmDialog({
         <p className="text-gray-600 mb-2">
           Are you sure you want to delete this task?
         </p>
-        <p className="text-sm font-medium text-gray-900 mb-6">"{taskTitle}"</p>
+        <p className="text-sm font-medium text-gray-900 mb-6">&quot;{taskTitle}&quot;</p>
         <p className="text-sm text-gray-500 mb-6">
           This action cannot be undone.
         </p>

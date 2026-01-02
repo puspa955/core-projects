@@ -1,33 +1,8 @@
 // src/components/tasks/task-card.tsx
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import type { Task, TaskStatus, Priority } from "@/types/task"
-import { Search, Filter, X, Edit2, Trash2, Calendar, Flag } from "lucide-react"
-
-
-interface TaskCardProps {
-  task: Task
-}
-
-const statusColors = {
-  TODO: "bg-gray-100 text-gray-800",
-  IN_PROGRESS: "bg-blue-100 text-blue-800",
-  DONE: "bg-green-100 text-green-800",
-}
-
-const priorityColors = {
-  LOW: "border-l-gray-400",
-  MEDIUM: "border-l-yellow-400",
-  HIGH: "border-l-red-400",
-}
-
-const statusLabels = {
-  TODO: "To Do",
-  IN_PROGRESS: "In Progress",
-  DONE: "Done",
-}
+import type { Task, Priority } from "@/types/task"
+import { Flag } from "lucide-react"
 
 export default function TaskCard({
   task,
