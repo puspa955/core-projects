@@ -6,6 +6,7 @@ import Link from "next/link"
 import CreateTaskForm from "@/components/tasks/create-task-form"
 import TaskList from "@/components/tasks/task-list"
 import type { Task } from "@/types/task"
+import type { Task as PrismaTask } from "@prisma/client"
 
 export default async function ProjectDetailPage({
   params,
@@ -38,10 +39,10 @@ export default async function ProjectDetailPage({
   }
 
   // Transform tasks to match the Task type
-  const tasks: Task[] = project.tasks.map((task: any) => ({
+  const tasks: Task[] = project.tasks.map((task: PrismaTask) => ({
     id: task.id,
     title: task.title,
-    description: task.description,
+    description: task.description ?? "",
     status: task.status as Task["status"],
     priority: task.priority as Task["priority"],
     projectId: task.projectId,
