@@ -38,7 +38,7 @@ export default async function ProjectDetailPage({
   }
 
   // Transform tasks to match the Task type
-  const tasks: Task[] = project.tasks.map((task) => ({
+  const tasks: Task[] = project.tasks.map((task: any) => ({
     id: task.id,
     title: task.title,
     description: task.description,
