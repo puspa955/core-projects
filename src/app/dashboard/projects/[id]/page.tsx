@@ -37,8 +37,11 @@ export default async function ProjectDetailPage({
     redirect("/dashboard/projects")
   }
 
+  // Infer the task type from the project query
+  type ProjectTask = typeof project.tasks[number]
+
   // Transform tasks to match the Task type
-  const tasks: Task[] = project.tasks.map((task) => ({
+  const tasks: Task[] = project.tasks.map((task: ProjectTask) => ({
     id: task.id,
     title: task.title,
     description: task.description ?? "",
