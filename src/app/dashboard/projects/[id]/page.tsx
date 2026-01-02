@@ -1,4 +1,5 @@
-// src/app/dashboard/projects/[id]/page.tsx
+"use client"
+
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { redirect } from "next/navigation"
@@ -6,6 +7,22 @@ import Link from "next/link"
 import CreateTaskForm from "@/components/tasks/create-task-form"
 import TaskList from "@/components/tasks/task-list"
 import type { Task } from "@/types/task"
+
+interface ProjectWithTasks {
+  id: string
+  name: string
+  description?: string | null
+  tasks: Array<{
+    id: string
+    title: string
+    description?: string | null
+    status: string
+    priority: string
+    projectId: string
+    createdAt: Date
+    updatedAt: Date
+  }>
+}
 
 export default async function ProjectDetailPage({
   params,
@@ -31,17 +48,17 @@ export default async function ProjectDetailPage({
         ],
       },
     },
-  })
+  }) as ProjectWithTasks | null
 
   if (!project) {
     redirect("/dashboard/projects")
   }
 
-  // Transform tasks to match the Task type
+  // Transform tasks to match frontend Task type
   const tasks: Task[] = project.tasks.map((task) => ({
     id: task.id,
     title: task.title,
-    description: task.description,
+    description: task.description ?? "", // handle null
     status: task.status as Task["status"],
     priority: task.priority as Task["priority"],
     projectId: task.projectId,
