@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 
 // Define types matching your Prisma enums
-type TaskStatus = "TODO" | "IN_PROGRESS" | "DONE"
+type TaskStatus = "TODO" | "IN_PROGRESS" | "COMPLETED"
 type Priority = "LOW" | "MEDIUM" | "HIGH"
 
 interface CreateTaskFormProps {
@@ -126,7 +126,7 @@ export default function CreateTaskForm({ projectId, onSuccess }: CreateTaskFormP
             >
               <option value="TODO">To Do</option>
               <option value="IN_PROGRESS">In Progress</option>
-              <option value="DONE">Done</option>
+              <option value="COMPLETED">Completed</option>
             </select>
           </div>
 
