@@ -68,18 +68,29 @@ export default async function DashboardPage() {
   const { projects, tasks } = await fetchDashboardData()
   const stats = computeStats(projects, tasks)
 
+  // You can get darkMode from cookies or context if needed
+  const darkMode = false // Set this based on your app's theme state
+
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">Dashboard Overview</h2>
+    <div className="">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2 text-gray-900">
+          Project Overview
+        </h1>
+        <p className="text-sm text-gray-600">
+          Track your projects and tasks at a glance
+        </p>
+      </div>
 
       {/* Statistics Cards */}
       <Suspense fallback={<StatsLoading />}>
-        <DashboardStats stats={stats} />
+        <DashboardStats stats={stats} darkMode={darkMode} />
       </Suspense>
 
       {/* Task Chart */}
       <Suspense fallback={<ChartLoading />}>
-        <TaskChart stats={stats} />
+        <TaskChart stats={stats} darkMode={darkMode} />
       </Suspense>
     </div>
   )
